@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumir API</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+
+        button {
+            margin: 20px;
+            padding: 10px 20 px;
+        }
+
+        .user-card {
+            border: 1px solid #ccc;
+            margin: 10px auto;
+            padding: 10px;
+            width: 300px;
+            border-radius: 10px;
+            background-color: rgb(246, 242, 239);
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Consumindo API</h2>
+    <button id="btn">Carregar usuário</button>
+    <div id="usuario"></div>
+    
+    <script>
+        //ASYNC - metodo assincrono - suincroniza API com o código
+        document.getElementById('btn').addEventListener('click', async () => {
+            const container = document.getElementById('usuario');
+            // FETCH - envia a requisição HTTP
+            // AWAIT - pausa até a resposta chegar
+            container.innerHTML = '<p>Carregando...</p>';
+            const res = await fetch('https://jsonplaceholder.typicode.com/users?_limit=5');
+            const data = await res.json();
+            container.innerHTML = '';
+            data.forEach(user => {
+                container.innerHTML += `
+                <div class="user-card">
+                    <h3>${user.name}</h3>
+                    <p>Email:${user.name}</p>
+                    <p>Cidade:${user.address.city}</p>
+                </div>;`
+            })
+        });
+    </script>
+
+</body>
+
+</html>
