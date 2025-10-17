@@ -1,6 +1,7 @@
 async function gerarConselho() {
     await fetch("https://api.adviceslip.com/advice").then(response => response.json()).then(data => {
         console.log(data);
+        
         const p = document.getElementById("conselhoTexto");
         p.textContent = data.slip.advice;
     })
